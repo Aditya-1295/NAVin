@@ -53,13 +53,13 @@ public class signup extends AppCompatActivity {
                 String password = editpass.getText().toString().trim();
 
                 if (TextUtils.isEmpty(password)){
-                    editemail.setError("Password Dalo madarchod");
+                    editemail.setError("Please Enter Password");
                     return;
 
                 }
 
                 if (TextUtils.isEmpty(email)){
-                    editpass.setError("bsdk email dalo");
+                    editpass.setError("This field cannot be left empty");
                     return;
                 }
 
@@ -68,17 +68,17 @@ public class signup extends AppCompatActivity {
                     return;
                 }
 
-                // registeringthe user to firebase;
+                // registering the user to firebase;
 
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(signup.this, "Account Created", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "Error please Try again"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(signup.this, "Error please Try again "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
