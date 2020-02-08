@@ -11,15 +11,14 @@
         android:id="@+id/textView"
         android:layout_width="141dp"
         android:layout_height="77dp"
+        android:layout_marginBottom="96dp"
         android:fontFamily="@font/anton"
         android:text="Signup"
         android:textColor="@android:color/black"
         android:textSize="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/editemail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.534" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -27,7 +26,7 @@
         android:layout_height="101dp"
         android:background="@drawable/login_screen_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,17 +37,23 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/roundbox"
         android:ems="10"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:hint="  Enter Name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editemail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.917" />
 
     <EditText
         android:id="@+id/editemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="380dp"
+        android:layout_marginBottom="396dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:background="@drawable/roundbox"
         android:ems="10"
         android:hint="  Enter Email"
@@ -64,6 +69,8 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/roundbox"
         android:ems="10"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:hint="  Enter Password"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +84,8 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/roundbox"
         android:ems="10"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:hint="  Enter Phone"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"

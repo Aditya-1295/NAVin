@@ -7,13 +7,14 @@
     tools:context=".login">
 
     <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="410dp"
         android:layout_height="101dp"
         android:background="@drawable/login_screen_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -23,13 +24,13 @@
         android:text="LOGIN"
         android:textColor="@android:color/black"
         android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/lname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="202dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/lname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
@@ -37,61 +38,70 @@
         android:ems="10"
         android:hint="  Enter Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText6"
+        app:layout_constraintBottom_toTopOf="@+id/lpass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.935" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/lpass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="232dp"
         android:background="@drawable/roundbox"
         android:ems="10"
         android:hint="  Enter Password"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="336dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/newsign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="188dp"
         android:fontFamily="@font/times new roman"
         android:text="New user signing? "
         android:textColor="@android:color/black"
         android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="532dp" />
+        app:layout_constraintTop_toTopOf="@+id/signup" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/login"
         android:layout_width="215dp"
         android:layout_height="39dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/round_box2"
         android:backgroundTint="#"
         android:text="Login"
         android:textColor="#FFF"
+        app:layout_constraintBottom_toTopOf="@+id/signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/lpass"
+        app:layout_constraintVertical_bias="0.042" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/signup"
         android:layout_width="62dp"
         android:layout_height="19dp"
+        android:layout_marginBottom="188dp"
         android:background="#3387A3"
         android:text="SIGN UP"
+
         android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.69"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="533dp" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
