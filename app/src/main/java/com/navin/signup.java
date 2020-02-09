@@ -38,7 +38,7 @@ public class signup extends AppCompatActivity {
     Firebase firebase;
     DatabaseReference databaseReference;
 
-     public static final String Database_Path = "User_Details_Database";
+     public static final String Database_Path = "User_Detail_Database";
 
 
 
@@ -73,16 +73,16 @@ public class signup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                userDetails userDetails = new userDetails();
+                userDetails userDetail = new userDetails();
 
 
                 getDataFromEditText();
 
-                userDetails.setUserName(nameholder);
-                userDetails.setPhoneNumber(phoneholder);
+                userDetail.setUserName(nameholder);
+                userDetail.setPhoneNumber(phoneholder);
                 String UserRecordIDFromServer = databaseReference.push().getKey();
-                databaseReference.child(UserRecordIDFromServer).setValue(userDetails);
-                Toast.makeText(signup.this, "sent to database",Toast.LENGTH_SHORT).show();
+                databaseReference.child(UserRecordIDFromServer).setValue(userDetail);
+                Toast.makeText(signup.this, "sent to database",Toast.LENGTH_LONG).show();
 
 
             }
