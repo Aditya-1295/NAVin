@@ -82,6 +82,7 @@ public class signup extends AppCompatActivity {
                 userDetails.setPhoneNumber(phoneholder);
                 String UserRecordIDFromServer = databaseReference.push().getKey();
                 databaseReference.child(UserRecordIDFromServer).setValue(userDetails);
+                Toast.makeText(signup.this, "sent to database",Toast.LENGTH_SHORT).show();
 
 
             }
