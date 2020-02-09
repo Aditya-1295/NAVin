@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -30,9 +31,6 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
     private static final int Request_Code=101;
     float zoom = 25;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +38,6 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
-
-
 
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -91,24 +87,26 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
-    private void onMapLoaded(float zoom) {
-        CameraUpdateFactory.zoomTo(20);
+
+    private void onMapLoaded() {
+
 
 
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         LatLng latLng=new LatLng(mlocation.getLatitude(),mlocation.getLongitude());
         MarkerOptions markerOptions=new MarkerOptions().position(latLng).title("You Are Here");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,6));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
         googleMap.addMarker(markerOptions);
-        onMapLoaded(25);
-
 
 
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

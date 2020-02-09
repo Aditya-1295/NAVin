@@ -11,15 +11,37 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+//import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class signup extends AppCompatActivity {
     EditText editname,editemail,editpass,editphone;
     Button registerbtn,alreadybtn;
     FirebaseAuth fAuth;
+
+    public static final String Firebase_Server_URL = "https://navin-dea57.firebaseio.com/";
+    String nameholder,phoneholder;
+
+    Firebase firebase;
+    DatabaseReference databaseReference;
+
+     public static final String Database_Path = "User_Details_Database";
+
+
+
 
 
 
@@ -29,13 +51,41 @@ public class signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
 
+        Firebase.setAndroidContext(signup.this);
+
+        firebase = new Firebase(Firebase_Server_URL);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path);
+
+
+
+
+
         editname = findViewById(R.id.editname);
+
         editemail = findViewById(R.id.editemail);
         editpass = findViewById(R.id.editpassword);
         editphone = findViewById(R.id.editphone);
 
         registerbtn = findViewById(R.id.registerbtn);
         alreadybtn = findViewById(R.id.alreadybtn);
+        registerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                userDetails userDetails = new userDetails();
+
+
+                getDataFromEditText();
+
+                userDetails.setUserName(nameholder);
+                userDetails.setPhoneNumber(phoneholder);
+                String UserRecordIDFromServer = databaseReference.push().getKey();
+                databaseReference.child(UserRecordIDFromServer).setValue(userDetails);
+
+
+            }
+        });
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -92,6 +142,21 @@ public class signup extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),login.class));
             }
         });
+
+
+
+
+
+
+
+
+
+
+    }
+
+    private void getDataFromEditText() {
+         nameholder = editname.getText().toString().trim();
+         phoneholder = editphone.getText().toString().trim();
 
 
 
