@@ -77,12 +77,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        discount.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent ui = new Intent(MainActivity.this,d)
-//            }
-//        });
+        discount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ui = new Intent(MainActivity.this,Discount.class);
+                startActivity(ui);
+            }
+        });
 
 
 

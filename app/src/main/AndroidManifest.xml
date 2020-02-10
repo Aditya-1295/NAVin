@@ -33,6 +33,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".search" />
+        <activity android:name=".Mallsnearby"/>
+        <activity android:name=".Discount"/>
         <activity android:name=".navigation" />
         <activity android:name=".login" />
         <activity android:name=".MainActivity"></activity>

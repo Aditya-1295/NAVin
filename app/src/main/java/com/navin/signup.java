@@ -83,7 +83,7 @@ public class signup extends AppCompatActivity {
                 String password = editpass.getText().toString().trim();
 
                 if (TextUtils.isEmpty(password)){
-                    editemail.setError("Please Enter Password");
+                    editemail.setError("This field cannot be left empty");
                     return;
 
                 }
@@ -120,44 +120,25 @@ public class signup extends AppCompatActivity {
 
 
 
-//                userDetails userDetail = new userDetails();
+                userDetails userDetail = new userDetails();
+
+
+                getDataFromEditText();
+
+                userDetail.setUserName(nameholder);
+                userDetail.setPhoneNumber(phoneholder);
+                String UserRecordIDFromServer = databaseReference.push().getKey();
+                databaseReference.child(UserRecordIDFromServer).setValue(userDetail);
+                Toast.makeText(signup.this, "sent to database",Toast.LENGTH_LONG).show();
+//                    rootRef = FirebaseDatabase.getInstance().getReference();
+//                    demoRef = rootRef.child("User_Detail_Database");
 //
 //
-//                getDataFromEditText();
+//                    String name = editname.getText().toString();
+//                    String phone = editphone.getText().toString();
 //
-//                userDetail.setUserName(nameholder);
-//                userDetail.setPhoneNumber(phoneholder);
-//                String UserRecordIDFromServer = databaseReference.push().getKey();
-//                databaseReference.child(UserRecordIDFromServer).setValue(userDetail);
-//                Toast.makeText(signup.this, "sent to database",Toast.LENGTH_LONG).show();
-
-
-
-
-
-
-
-
-                    rootRef = FirebaseDatabase.getInstance().getReference();
-                    demoRef = rootRef.child("User_Detail_Database");
-
-
-                    String name = editname.getText().toString();
-                    String phone = editphone.getText().toString();
-
-                    demoRef.child("name").setValue(name);
-                    demoRef.child("phoneNumber").setValue(phone);
-
-
-
-
-
-
-
-
-
-
-
+//                    demoRef.child("name").setValue(name);
+//                    demoRef.child("phoneNumber").setValue(phone);
 
 
 
