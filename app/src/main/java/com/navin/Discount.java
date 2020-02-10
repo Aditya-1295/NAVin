@@ -18,7 +18,7 @@ public class Discount extends AppCompatActivity {
             "Maggi",
             "Kathi Junction",
             "Coffee Day",
-            "Quench",
+            "Quenc",
             "no"
     };
 
