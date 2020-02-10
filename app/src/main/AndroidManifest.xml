@@ -4,9 +4,8 @@
     package="com.navin">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,14 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Mallsnearby"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/map_key"/>
+            android:value="@string/map_key" />
 
-
-        <activity android:name=".pop"
-            android:theme="@style/AppTheme.pop"
-        ></activity>
+        <activity
+            android:name=".pop"
+            android:theme="@style/AppTheme.pop" />
         <activity android:name=".signup" />
         <activity android:name=".splashScreen">
             <intent-filter>
@@ -35,7 +35,7 @@
         <activity android:name=".search" />
         <activity android:name=".navigation" />
         <activity android:name=".login" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
