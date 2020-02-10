@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "815591739173",
+    "firebase_url": "https://navin-dea57.firebaseio.com",
+    "project_id": "navin-dea57",
+    "storage_bucket": "navin-dea57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815591739173:android:50976f796d2f8d7f12d4cc",
+        "android_client_info": {
+          "package_name": "com.navin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815591739173-lnnoove2grj5ic15i82f3gdecjjo3lad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.navin",
+            "certificate_hash": "7e9b86c8d0bc68c7cecb56d81c144c29495a705a"
+          }
+        },
+        {
+          "client_id": "815591739173-u9h0udh432g2bmu2dbb5b4t6jfcuitv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSRfc-7j2F54xVtgJV9mwz1qkvYv2GVGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815591739173-u9h0udh432g2bmu2dbb5b4t6jfcuitv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
