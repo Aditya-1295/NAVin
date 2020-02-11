@@ -1,13 +1,16 @@
 package com.navin;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,12 +32,20 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
     Location mlocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int Request_Code=101;
-    float zoom = 25;
+    Button button,button5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop);
+
+
+        button = findViewById(R.id.button);
+        button.setOnClickListener(navigate);
+        button5 = findViewById(R.id.button5);
+        button5.setOnClickListener(goback);
+
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
@@ -58,6 +69,20 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
+    View.OnClickListener goback = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent m = new Intent(pop.this,MainActivity.class);
+        }
+    };
+
+    View.OnClickListener navigate = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent l = new Intent(pop.this,navigation.class);
+            startActivity(l);
+        }
+    };
     private void getLastLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED){

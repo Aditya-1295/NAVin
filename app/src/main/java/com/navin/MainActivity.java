@@ -10,13 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.firebase.client.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,32 +19,23 @@ public class MainActivity extends AppCompatActivity {
     Button logout;
     Button discount;
     TextView named;
-    DatabaseReference demoRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mall = findViewById(R.id.mall);
         logout = findViewById(R.id.logout);
         discount = findViewById(R.id.discount);
-
-        demoRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://navin-dea57.firebaseio.com/");
-
         named = findViewById(R.id.named);
-        demoRef.child("name").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String val = dataSnapshot.getValue(String.class);
-                named.setText(val);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+        Intent i = getIntent();
+        String NAME = i.getStringExtra("USERNAME");
+        named.setText(NAME);
+
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
