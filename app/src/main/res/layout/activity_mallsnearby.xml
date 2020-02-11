@@ -4,6 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pop_bg"
     tools:context=".Mallsnearby">
 
+
+    <TextView
+        android:id="@+id/serch"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/boxedittext"
+        android:hint="🔎 Search"
+        android:padding="10dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="30dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

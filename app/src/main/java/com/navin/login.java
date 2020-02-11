@@ -28,6 +28,7 @@ public class login extends AppCompatActivity {
         lemail = findViewById(R.id.lemail);
         lpass = findViewById(R.id.lpass);
         login = findViewById(R.id.login);
+        signup = findViewById(R.id.signup);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -70,12 +71,19 @@ public class login extends AppCompatActivity {
         });
 
 
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ut = new Intent(com.navin.login.this,signup.class);
+                startActivity(ut);
+            }
+        });
+
+
 
 
 
     }
 
-    public void signup(View view) {
-        startActivity(new Intent(getApplicationContext(),signup.class));
-    }
+
 }
