@@ -8,13 +8,14 @@
     tools:context=".Mallsnearby">
 
 
-    <SearchView
+    <EditText
         android:id="@+id/search"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="76dp"
         android:background="@drawable/boxedittext"
+        android:hint=" 🔍 Search malls nearby"
         android:iconifiedByDefault="false"
         android:padding="10dp"
         android:paddingStart="10dp"
@@ -22,8 +23,8 @@
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
         android:paddingRight="10dp"
+
         android:paddingBottom="10dp"
-        android:queryHint="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +33,6 @@
     <ListView
         android:id="@+id/databaselist"
         android:layout_width="265dp"
-
         android:layout_height="400dp"
         android:layout_below="@+id/search"
         android:layout_alignStart="@+id/search"
@@ -40,10 +40,23 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="69dp"
         android:layout_marginEnd="17dp"
+        android:dividerHeight="8dp"
         app:layout_constraintEnd_toEndOf="@+id/search"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="@+id/search"
         app:layout_constraintTop_toBottomOf="@+id/search" />
+
+    <Button
+        android:id="@+id/navin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/databaselist"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="52dp"
+        android:text="navigate here"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>

@@ -3,15 +3,27 @@ package com.navin;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.jakewharton.rxbinding.widget.RxSearchView;
+
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class Mallsnearby extends AppCompatActivity {
-    SearchView search;
+    EditText search;
     ListView databaselist;
+    Button navin;
 
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
@@ -23,6 +35,7 @@ public class Mallsnearby extends AppCompatActivity {
 
         search = findViewById(R.id.search);
         databaselist = findViewById(R.id.databaselist);
+        navin = findViewById(R.id.navin);
 
 
         list = new ArrayList<String>();
@@ -41,20 +54,43 @@ public class Mallsnearby extends AppCompatActivity {
 
         databaselist.setAdapter((adapter));
 
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+        search.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            private Timer timer = new Timer();
+            private final long DELAY = 500; // milliseconds
 
             @Override
-            public boolean onQueryTextChange(String s) {
-
-                adapter.getFilter().filter(s);
-
-                return false;
+            public void afterTextChanged(final Editable s) {
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.getFilter().filter(search.getText());
+                            }
+                        });
+                    }
+                }, DELAY);
             }
         });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                navin.setVisibility(View.VISIBLE);
+
+            }
+        });
+
     }
 
 

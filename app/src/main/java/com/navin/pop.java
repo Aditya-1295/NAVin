@@ -32,7 +32,8 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
     Location mlocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int Request_Code=101;
-    Button button,button5;
+    Button navi;
+    double longi,lati;
 
 
     @Override
@@ -41,10 +42,8 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_pop);
 
 
-        button = findViewById(R.id.button);
-        button.setOnClickListener(navigate);
-        button5 = findViewById(R.id.button5);
-        button5.setOnClickListener(goback);
+        navi = findViewById(R.id.navi);
+        navi.setOnClickListener(navigate);
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -69,12 +68,7 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
-    View.OnClickListener goback = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent m = new Intent(pop.this,MainActivity.class);
-        }
-    };
+
 
     View.OnClickListener navigate = new View.OnClickListener() {
         @Override
@@ -102,6 +96,13 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
                             .findFragmentById(R.id.map);
                     supportMapFragment.getMapAsync(pop.this);
 
+                    longi = mlocation.getLongitude();
+                    lati = mlocation.getLatitude();
+
+
+
+
+
 
 
 
@@ -112,12 +113,6 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
-
-    private void onMapLoaded() {
-
-
-
-    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
