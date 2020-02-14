@@ -1,19 +1,28 @@
 package com.navin;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -28,27 +37,57 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-public class pop extends FragmentActivity implements OnMapReadyCallback {
-    Location mlocation;
-    FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int Request_Code=101;
-    Button navi;
-    double longi,lati;
+import java.util.ArrayList;
 
+public class pop extends Activity {
+
+    ListView mallnear;
+    ArrayList<String> List;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_pop);
 
 
-        navi = findViewById(R.id.navi);
-        navi.setOnClickListener(navigate);
+        Intent i = getIntent();
+        Bundle b = i.getBundleExtra("BUNDLE");
+
+        ArrayList<String> malls = (ArrayList<String>) b.getSerializable("Malls");
+        String[] malls_t = new String[malls.size()];
+        for (int m = 0; m < malls.size(); m++)
+            malls_t[m] = malls.get(m);
+
+        mallnear = findViewById(R.id.mallnear);
 
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        getLastLocation();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, malls) {
 
+            @Override
+            public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                text1.setTextColor(Color.BLACK);
+
+                view.setOnClickListener(new View.OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent i = new Intent(pop.this, navigation.class);
+                        startActivity(i);
+
+
+                    }
+                });
+                return view;
+            }
+        };
+
+
+        mallnear.setAdapter((adapter));
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -56,7 +95,7 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*0.8),(int)(height*0.7));
+        getWindow().setLayout((int) (width * 0.8), (int) (height * 0.7));
 
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
@@ -69,64 +108,13 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
     }
 
 
-
     View.OnClickListener navigate = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent l = new Intent(pop.this,navigation.class);
+            Intent l = new Intent(pop.this, navigation.class);
             startActivity(l);
         }
     };
-    private void getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]
-                    {Manifest.permission.ACCESS_FINE_LOCATION},Request_Code);
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location !=null){
-                    mlocation=location;
-                    Toast.makeText(getApplicationContext(),mlocation.getLatitude()+""+mlocation.getLongitude(),
-                            Toast.LENGTH_SHORT).show();
-                    SupportMapFragment supportMapFragment=(SupportMapFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.map);
-                    supportMapFragment.getMapAsync(pop.this);
-
-                    longi = mlocation.getLongitude();
-                    lati = mlocation.getLatitude();
-
-                }
-            }
-        });
-
-    }
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        LatLng latLng=new LatLng(mlocation.getLatitude(),mlocation.getLongitude());
-        MarkerOptions markerOptions=new MarkerOptions().position(latLng).title("You Are Here");
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
-        googleMap.addMarker(markerOptions);
-
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case Request_Code:
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    getLastLocation();
-                }
-                break;
-
-        }
-    }
 }

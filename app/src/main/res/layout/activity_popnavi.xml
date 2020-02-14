@@ -4,6 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/popback"
     tools:context=".popnavi">
+
+    <TextView
+        android:id="@+id/discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="Discounts"
+        android:textColor="@android:color/black"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/petereng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Allen Solly 50% discount"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/discount"
+        app:layout_constraintStart_toStartOf="@+id/discount"
+        app:layout_constraintTop_toBottomOf="@+id/discount" />
+
+    <Button
+        android:id="@+id/imageView5"
+        android:layout_width="118dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/allen"
+        app:layout_constraintEnd_toEndOf="@+id/petereng"
+        app:layout_constraintStart_toStartOf="@+id/petereng"
+        app:layout_constraintTop_toBottomOf="@+id/petereng"
+        app:srcCompat="@drawable/allen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

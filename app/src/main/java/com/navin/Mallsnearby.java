@@ -2,11 +2,13 @@ package com.navin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,25 +41,38 @@ public class Mallsnearby extends AppCompatActivity {
         list = new ArrayList<String>();
 
 
-        list.add("laude");
-        list.add("jhaat");
-        list.add("benchod");
-        list.add("lae");
-        list.add("chut");
-        list.add("bhoote");
-        list.add("bosada");
-        list.add("jhatoora");
+        list.add("BU A BLOCK");
+        list.add("Test Mall 2");
+        list.add("Test Mall 3");
+        list.add("Test Mall 4");
+        list.add("Test Mall 5");
+        list.add("Test Mall 6");
+        list.add("Test Mall 7");
+        list.add("Test Mall 8");
 
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         databaselist.setAdapter((adapter));
+
+        databaselist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    Intent j = new Intent(Mallsnearby.this, navigation.class);
+                    startActivity(j);
+                }
+            }
+        });
 
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             private Timer timer = new Timer();
             private final long DELAY = 500; // milliseconds
@@ -90,7 +105,6 @@ public class Mallsnearby extends AppCompatActivity {
         });
 
     }
-
 
 
 }

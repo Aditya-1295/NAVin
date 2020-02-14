@@ -1,6 +1,7 @@
 package com.navin;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,12 +24,11 @@ public class splashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(splashScreen.this,signup.class);
+                Intent mainIntent = new Intent(splashScreen.this, signup.class);
                 startActivity(mainIntent);
                 finish();
             }
-        },1500);
-
+        }, 1500);
 
 
     }

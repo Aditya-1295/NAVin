@@ -15,8 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -27,8 +25,8 @@ import java.net.URLEncoder;
 
 
 public class signup extends AppCompatActivity {
-    EditText editname,editemail,editpass,editphone;
-    Button registerbtn,alreadybtn;
+    EditText editname, editemail, editpass, editphone;
+    Button registerbtn, alreadybtn;
 
 
     @Override
@@ -50,8 +48,8 @@ public class signup extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            if (editname.getText().toString().equals("") || editpass.getText().toString().equals("") ||editphone.getText().toString().equals("") || editemail.getText().toString().equals("")){
-                Toast.makeText(signup.this,"One or more fields are empty", Toast.LENGTH_SHORT).show();
+            if (editname.getText().toString().equals("") || editpass.getText().toString().equals("") || editphone.getText().toString().equals("") || editemail.getText().toString().equals("")) {
+                Toast.makeText(signup.this, "One or more fields are empty", Toast.LENGTH_SHORT).show();
 
 
                 return;
@@ -85,7 +83,7 @@ public class signup extends AppCompatActivity {
                             response.append(line);
                     } catch (Exception e) {
                         try {
-                            Log.e("lol",e.toString());
+                            Log.e("lol", e.toString());
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -103,12 +101,13 @@ public class signup extends AppCompatActivity {
                                 reader.close();
                             }
                             c.disconnect();
-                        } catch (Exception e) { }
+                        } catch (Exception e) {
+                        }
                     }
-                    Log.e("lol",response.toString());
-                    if(response.toString().equals("OK")){
-                        Intent i = new Intent(signup.this,MainActivity.class);
-                        i.putExtra("USERNAME",editname.getText().toString());
+                    Log.e("lol", response.toString());
+                    if (response.toString().equals("OK")) {
+                        Intent i = new Intent(signup.this, MainActivity.class);
+                        i.putExtra("USERNAME", editname.getText().toString());
                         startActivity(i);
                     }
                 }
@@ -120,7 +119,7 @@ public class signup extends AppCompatActivity {
     View.OnClickListener alreadyclicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent j = new Intent(signup.this,login.class);
+            Intent j = new Intent(signup.this, login.class);
             startActivity(j);
         }
     };

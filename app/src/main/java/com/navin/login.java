@@ -23,8 +23,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class login extends AppCompatActivity {
-    EditText lemail,lpass;
-    Button login,signup;
+    EditText lemail, lpass;
+    Button login, signup;
 
 
     @Override
@@ -37,16 +37,12 @@ public class login extends AppCompatActivity {
         signup = findViewById(R.id.signup);
 
 
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String email = lemail.getText().toString().trim();
-//                String password = lpass.getText().toString().trim();
-//                Login(email,password);
-                Intent i = new Intent(login.this,MainActivity.class); //to be deleted when app is running ....
-                i.putExtra("USERNAME","aditya");
-                startActivity(i);
+                String email = lemail.getText().toString().trim();
+                String password = lpass.getText().toString().trim();
+                Login(email, password);
 
 
             }
@@ -55,14 +51,14 @@ public class login extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ut = new Intent(com.navin.login.this,signup.class);
+                Intent ut = new Intent(com.navin.login.this, signup.class);
                 startActivity(ut);
             }
         });
 
     }
 
-    private void Login(final String a,final String b) {
+    private void Login(final String a, final String b) {
         Thread network_thread = new Thread(new Runnable() {
             BufferedReader reader;
             BufferedWriter writer;
@@ -91,12 +87,11 @@ public class login extends AppCompatActivity {
                     while ((line = reader.readLine()) != null)
                         response.append(line);
 
-                    if (response.toString().substring(0,3).equals("OK:")) {
-                        Intent i = new Intent(login.this,MainActivity.class);
-                        i.putExtra("USERNAME",response.substring(3));
+                    if (response.toString().substring(0, 3).equals("OK:")) {
+                        Intent i = new Intent(login.this, MainActivity.class);
+                        i.putExtra("USERNAME", response.substring(3));
                         startActivity(i);
-                    }
-                    else if (response.toString().equals("Failure")) runOnUiThread(new Runnable() {
+                    } else if (response.toString().equals("Failure")) runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Invalid credentials", Toast.LENGTH_SHORT).show();

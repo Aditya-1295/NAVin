@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".popnavi"></activity>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -25,6 +25,10 @@
         <activity
             android:name=".pop"
             android:theme="@style/AppTheme.pop" />
+        <activity
+            android:name=".popnavi"
+            android:theme="@style/AppTheme.pop"/>
+
         <activity android:name=".signup" />
         <activity android:name=".splashScreen">
             <intent-filter>
@@ -39,6 +43,7 @@
         <activity android:name=".navigation" />
         <activity android:name=".login" />
         <activity android:name=".MainActivity" />
+
 
         <meta-data
             android:name="preloaded_fonts"

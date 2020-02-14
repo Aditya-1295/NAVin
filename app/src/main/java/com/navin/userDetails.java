@@ -4,26 +4,26 @@ public class userDetails {
     private String name;
     private String phoneNumber;
 
-    public userDetails(){
+    public userDetails() {
 
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
 
-    public void setUserName(String name){
-        this.name=name;
+    public void setUserName(String name) {
+        this.name = name;
 
     }
 
-    public String getPhoneNumber(){
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber){
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 
 
 }

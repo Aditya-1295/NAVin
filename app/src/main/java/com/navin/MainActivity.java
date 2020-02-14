@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String NAME = i.getStringExtra("USERNAME");
-        named.setText(NAME);
+        named.setText("Welcome " + NAME);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
         }
         Location l = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 
-        getMAll(l.getLatitude(),l.getLongitude());
+        getMAll(l.getLatitude(), l.getLongitude());
     }
 
-    private ArrayList<String> getMAll(double lati, double longi){
+    private ArrayList<String> getMAll(double lati, double longi) {
         final ArrayList<String> final_malls = new ArrayList<String>();
         final double X = longi;
-        final double Y =lati;
+        final double Y = lati;
         Thread network_thread = new Thread(new Runnable() {
             BufferedReader reader;
             BufferedWriter writer;
@@ -115,15 +115,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                final StringBuilder response= new StringBuilder();
+                final StringBuilder response = new StringBuilder();
                 try {
                     URL url = new URL("http", "3.19.169.232", "getMalls.php");
-                    c =  (HttpURLConnection) url.openConnection();
+                    c = (HttpURLConnection) url.openConnection();
                     c.setRequestMethod("POST");
                     c.setDoOutput(true);
                     c.setDoInput(true);
                     c.setConnectTimeout(3000);
-                    String param = "X="+ URLEncoder.encode(String.valueOf(X)) + "&Y="+ URLEncoder.encode(String.valueOf(Y));
+                    String param = "X=" + URLEncoder.encode(String.valueOf(X)) + "&Y=" + URLEncoder.encode(String.valueOf(Y));
                     writer = new BufferedWriter(new OutputStreamWriter(c.getOutputStream()));
                     writer.write(param);
                     writer.flush();
@@ -131,43 +131,45 @@ public class MainActivity extends AppCompatActivity {
                     reader = new BufferedReader(new InputStreamReader(c.getInputStream()));
 
                     String line;
-                    while ((line = reader.readLine()) !=null)
+                    while ((line = reader.readLine()) != null)
                         response.append(line);
 
                     try {
                         JSONObject obj = new JSONObject(response.toString());
                         JSONArray mall_array = obj.getJSONArray("Malls");
-                        for(int i = 0;i<mall_array.length();i++) {
+                        for (int i = 0; i < mall_array.length(); i++) {
                             JSONObject temp = new JSONObject(mall_array.get(i).toString());
                             final_malls.add(temp.getString("Name"));
                         }
-                        if(final_malls.size()==0)return;
+                        if (final_malls.size() == 0) return;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 Intent intent = new Intent(MainActivity.this, pop.class);
-                                intent.putExtra("Malls",malls_nearby);
+                                Bundle b = new Bundle();
+                                b.putSerializable("Malls", final_malls);
+                                intent.putExtra("BUNDLE", b);
                                 startActivity(intent);
                             }
                         });
+                    } catch (JSONException e) {
                     }
-                    catch(JSONException e){}
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     try {
                         Toast t = Toast.makeText(getApplicationContext(), "Cannot connect to server", Toast.LENGTH_SHORT);
                         t.setGravity(Gravity.CENTER, 0, 0);
                         t.show();
-                    } catch(Exception e1){}
-                }
-                finally {
-                    try {
-                        if(writer!=null && reader !=null){
-                            writer.close();
-                            reader.close();}
-                        c.disconnect();
+                    } catch (Exception e1) {
                     }
-                    catch (Exception e){}
+                } finally {
+                    try {
+                        if (writer != null && reader != null) {
+                            writer.close();
+                            reader.close();
+                        }
+                        c.disconnect();
+                    } catch (Exception e) {
+                    }
                 }
             }
         });
@@ -177,18 +179,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void runtimePermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]
-                    {Manifest.permission.ACCESS_FINE_LOCATION},Request_Code);
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, Request_Code);
         }
         doFurther();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
+        switch (requestCode) {
             case Request_Code:
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     doFurther();
 
                 }

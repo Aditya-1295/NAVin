@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class navigation extends AppCompatActivity {
 
-    Button navigate, endn,swipe;
+    Button navigate, endn, swipe;
 
 
     @Override
@@ -26,7 +26,7 @@ public class navigation extends AppCompatActivity {
         swipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent k = new Intent(navigation.this,popnavi.class);
+                Intent k = new Intent(navigation.this, popnavi.class);
                 startActivity(k);
             }
         });
@@ -37,7 +37,6 @@ public class navigation extends AppCompatActivity {
             public void onClick(View v) {
 
                 navigate.setVisibility(View.INVISIBLE);
-
 
 
                 endn.setVisibility(View.VISIBLE);
@@ -51,7 +50,6 @@ public class navigation extends AppCompatActivity {
 
 
                 navigate.setVisibility(View.VISIBLE);
-
 
 
                 endn.setVisibility(View.INVISIBLE);
