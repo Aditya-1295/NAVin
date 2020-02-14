@@ -60,7 +60,7 @@ public class Discount extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Toast.makeText(getApplicationContext(),"You Selected "+countryNames[position-1]+ " as Country",Toast.LENGTH_SHORT).show();        }
+                Toast.makeText(getApplicationContext(),"You Selected "+countryNames[position-1]+ " as Restaurant",Toast.LENGTH_SHORT).show();        }
         });
     }
 }
