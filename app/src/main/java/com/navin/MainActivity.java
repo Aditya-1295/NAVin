@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -43,11 +46,12 @@ public class MainActivity extends AppCompatActivity {
     Button logout;
     Button discount;
     TextView named;
-    Double lati;
-    Double longi;
+    double lati;
+    double longi;
     Location mlocation;
     FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int Request_Code=101;
+    private static final int Request_Code = 101;
+    ArrayList<String> malls_nearby = new ArrayList<String>();
 
 
     @Override
@@ -58,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         discount = findViewById(R.id.discount);
         named = findViewById(R.id.named);
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        getLastLocation();
-
 
         Intent i = getIntent();
         String NAME = i.getStringExtra("USERNAME");
@@ -91,19 +91,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        getLastLocation();
+        runtimePermission();
+    }
 
-//        final ArrayList<String> malls_nearby = getMAll(lati,longi);
-//        if(malls_nearby.size()==0)return;
-//
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(MainActivity.this, pop.class);
-//                startActivity(intent);
-//                intent.putExtra("Malls",malls_nearby);
-//            }
-//        }, 1000);
+    private void doFurther() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        Location l = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+        getMAll(l.getLatitude(),l.getLongitude());
     }
 
     private ArrayList<String> getMAll(double lati, double longi){
@@ -138,9 +136,20 @@ public class MainActivity extends AppCompatActivity {
 
                     try {
                         JSONObject obj = new JSONObject(response.toString());
-                        JSONArray hospital_array = obj.getJSONArray("Malls");
-                        for(int i = 0;i<hospital_array.length();i++)
-                            final_malls.add(hospital_array.get(i).toString());
+                        JSONArray mall_array = obj.getJSONArray("Malls");
+                        for(int i = 0;i<mall_array.length();i++) {
+                            JSONObject temp = new JSONObject(mall_array.get(i).toString());
+                            final_malls.add(temp.getString("Name"));
+                        }
+                        if(final_malls.size()==0)return;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(MainActivity.this, pop.class);
+                                intent.putExtra("Malls",malls_nearby);
+                                startActivity(intent);
+                            }
+                        });
                     }
                     catch(JSONException e){}
                 }
@@ -163,30 +172,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         network_thread.start();
-        return final_malls;
+        return null;
     }
 
-    private void getLastLocation() {
+    private void runtimePermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]
                     {Manifest.permission.ACCESS_FINE_LOCATION},Request_Code);
-            return;
         }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location !=null){
-                    mlocation=location;
-                    longi = mlocation.getLongitude();
-                    lati = mlocation.getLatitude();
-                    Log.e("X",String.valueOf(longi));
-
-                }
-            }
-        });
-
+        doFurther();
     }
 
     @Override
@@ -194,10 +189,10 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode){
             case Request_Code:
                 if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    getLastLocation();
+                    doFurther();
+
                 }
                 break;
-
         }
     }
 }
