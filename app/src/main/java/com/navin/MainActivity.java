@@ -2,15 +2,26 @@ package com.navin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     TextView named;
     Double lati;
     Double longi;
+    Location mlocation;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int Request_Code=101;
 
 
     @Override
@@ -44,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         discount = findViewById(R.id.discount);
         named = findViewById(R.id.named);
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        getLastLocation();
 
 
         Intent i = getIntent();
@@ -74,17 +91,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final ArrayList<String> malls_nearby = getMAll(lati,longi);
-        if(malls_nearby.size()==0)return;
+        getLastLocation();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, pop.class);
-                startActivity(intent);
-                intent.putExtra("Malls",malls_nearby);
-            }
-        }, 1000);
+//        final ArrayList<String> malls_nearby = getMAll(lati,longi);
+//        if(malls_nearby.size()==0)return;
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(MainActivity.this, pop.class);
+//                startActivity(intent);
+//                intent.putExtra("Malls",malls_nearby);
+//            }
+//        }, 1000);
     }
 
     private ArrayList<String> getMAll(double lati, double longi){
@@ -145,5 +164,40 @@ public class MainActivity extends AppCompatActivity {
         });
         network_thread.start();
         return final_malls;
+    }
+
+    private void getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION},Request_Code);
+            return;
+        }
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location !=null){
+                    mlocation=location;
+                    longi = mlocation.getLongitude();
+                    lati = mlocation.getLatitude();
+                    Log.e("X",String.valueOf(longi));
+
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case Request_Code:
+                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    getLastLocation();
+                }
+                break;
+
+        }
     }
 }
