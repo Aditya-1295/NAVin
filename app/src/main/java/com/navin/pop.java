@@ -99,14 +99,6 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
                     longi = mlocation.getLongitude();
                     lati = mlocation.getLatitude();
 
-
-
-
-
-
-
-
-
                 }
             }
         });
@@ -125,8 +117,6 @@ public class pop extends FragmentActivity implements OnMapReadyCallback {
 
 
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

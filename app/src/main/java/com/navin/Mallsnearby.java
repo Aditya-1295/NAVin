@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.jakewharton.rxbinding.widget.RxSearchView;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
