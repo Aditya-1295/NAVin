@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     Button logout;
     Button discount;
     TextView named;
+    Double lati;
+    Double longi;
 
 
     @Override
@@ -37,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this,pop.class);
-                startActivity(intent);
-            }
-        },1000);
+
+
+
+
+
+
+
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +73,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+    }
+
+
+    String[] getMAll(Double lati, Double longi){
+
+        if (){
+
+        }
+        else{
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(MainActivity.this,pop.class);
+                    startActivity(intent);
+                }
+            },1000);
+
+        }
 
     }
 
