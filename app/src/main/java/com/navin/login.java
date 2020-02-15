@@ -44,6 +44,13 @@ public class login extends AppCompatActivity {
                 String password = lpass.getText().toString().trim();
                 Login(email, password);
 
+                if (lpass.getText().toString().equals("") || lemail.getText().toString().equals("")) {
+                    Toast.makeText(login.this, "One or more fields are empty", Toast.LENGTH_SHORT).show();
+
+
+                    return;
+                }
+
 
             }
         });

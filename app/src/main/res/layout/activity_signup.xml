@@ -53,39 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <EditText
-        android:id="@+id/editemail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/roundbox"
-        android:ems="10"
-        android:hint="  Enter Email"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/editname"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="@+id/editname"
-        app:layout_constraintTop_toBottomOf="@+id/editname" />
 
-    <EditText
-        android:id="@+id/editphone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/roundbox"
-        android:ems="10"
-        android:hint="  Enter Phone"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/editpassword"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editpassword"
-        app:layout_constraintTop_toBottomOf="@+id/editpassword" />
 
     <Button
         android:id="@+id/registerbtn"
@@ -143,4 +111,40 @@
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/registerbtn" />
+
+    <EditText
+        android:id="@+id/editphone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/roundbox"
+        android:ems="10"
+        android:hint="  Enter Phone"
+        android:inputType="phone"
+        android:padding="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/editpassword"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editpassword"
+        app:layout_constraintTop_toBottomOf="@+id/editpassword" />
+
+    <EditText
+
+
+        android:inputType="textEmailAddress"
+        android:id="@+id/editemail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/roundbox"
+        android:ems="10"
+        android:hint="  Enter Email"
+        android:padding="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/editname"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="@+id/editname"
+        app:layout_constraintTop_toBottomOf="@+id/editname" />
 </androidx.constraintlayout.widget.ConstraintLayout>

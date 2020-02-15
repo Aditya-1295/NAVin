@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,6 +43,8 @@ public class signup extends AppCompatActivity {
         alreadybtn = findViewById(R.id.alreadybtn);
         alreadybtn.setOnClickListener(alreadyclicked);
         registerbtn.setOnClickListener(registerclicked);
+
+
     }
 
     View.OnClickListener registerclicked = new View.OnClickListener() {

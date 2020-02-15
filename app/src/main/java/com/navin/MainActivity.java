@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String NAME = i.getStringExtra("USERNAME");
-        named.setText("Welcome " + NAME);
+        named.setText("WELCOME " + NAME.toUpperCase());
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
