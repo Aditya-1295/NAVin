@@ -26,8 +26,6 @@ public class navigation extends AppCompatActivity {
     static public ZoomLayout zl;
     public PinchZoomPan pzp;
 
-    static Mall main_mall;
-
     static float devWidth;
     static float devHeight;
     static Location[] endpoint = new Location[2];
@@ -36,11 +34,15 @@ public class navigation extends AppCompatActivity {
     Button endn, swipe;
     static TextView currShopName;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
+        Intent i = getIntent();
+        Bundle bb =  i.getBundleExtra("BUNDLE");
+        PinchZoomPan.main_mall = (Mall) bb.getSerializable("MALL");
+
         currShopName = findViewById(R.id.currShopName);
         getImage  = findViewById(R.id.getIm);
         pzp = findViewById(R.id.pinchZoomPan);

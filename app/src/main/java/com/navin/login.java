@@ -46,12 +46,8 @@ public class login extends AppCompatActivity {
 
                 if (lpass.getText().toString().equals("") || lemail.getText().toString().equals("")) {
                     Toast.makeText(login.this, "One or more fields are empty", Toast.LENGTH_SHORT).show();
-
-
                     return;
                 }
-
-
             }
         });
 
@@ -66,6 +62,15 @@ public class login extends AppCompatActivity {
     }
 
     private void Login(final String a, final String b) {
+//DELETE THIS
+        Intent i = new Intent(login.this, MainActivity.class);
+        i.putExtra("USERNAME","test");
+        startActivity(i);
+
+        //DELETE THIS
+
+
+
         Thread network_thread = new Thread(new Runnable() {
             BufferedReader reader;
             BufferedWriter writer;

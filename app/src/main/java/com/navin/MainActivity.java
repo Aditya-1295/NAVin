@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i < mall_array.length(); i++) {
                             JSONObject temp = new JSONObject(mall_array.get(i).toString());
                             final_malls.add(temp.getString("Name"));
-                            final_malls.add(temp.getString("File"));
+                            final_malls_file.add(temp.getString("File"));
                         }
                         if (final_malls.size() == 0) return;
                         runOnUiThread(new Runnable() {
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MainActivity.this, pop.class);
                                 Bundle b = new Bundle();
                                 b.putSerializable("Malls", final_malls);
-                                b.putSerializable("File",final_malls_file);
+                                b.putSerializable("Files",final_malls_file);
                                 intent.putExtra("BUNDLE", b);
                                 startActivity(intent);
                             }
@@ -190,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
             case Request_Code:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     doFurther();
-
                 }
                 break;
         }

@@ -37,6 +37,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class pop extends Activity {
@@ -50,17 +56,13 @@ public class pop extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_pop);
 
-
         Intent i = getIntent();
         Bundle b = i.getBundleExtra("BUNDLE");
 
         ArrayList<String> malls = (ArrayList<String>) b.getSerializable("Malls");
-        String[] malls_t = new String[malls.size()];
-        for (int m = 0; m < malls.size(); m++)
-            malls_t[m] = malls.get(m);
+        final ArrayList<String> files = (ArrayList<String>) b.getSerializable("Files");
 
         mallnear = findViewById(R.id.mallnear);
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, malls) {
 
@@ -72,12 +74,35 @@ public class pop extends Activity {
 
                 view.setOnClickListener(new View.OnClickListener() {
 
-
                     @Override
                     public void onClick(View v) {
 
-                        Intent i = new Intent(pop.this, navigation.class);
-                        startActivity(i);
+                        final Mall mall = null;
+
+                        Thread net_thd = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                    BufferedInputStream in = new BufferedInputStream(new URL("http://3.19.169.232/MAPS/"+files.get(position)).openStream());
+                                    ObjectInputStream obji = new ObjectInputStream(in);
+                                    final Mall mall= (Mall) obji.readObject();
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent i = new Intent(pop.this, navigation.class);
+                                            Bundle b = new Bundle();
+                                            b.putSerializable("MALL",mall);
+                                            i.putExtra("BUNDLE",b);
+                                            startActivity(i);
+
+                                        }
+                                    });
+
+                                } catch (Exception e) { Log.e("df",e.toString());}
+                            }
+                        });
+                        net_thd.start();
 
 
                     }
