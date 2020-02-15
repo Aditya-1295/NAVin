@@ -46,13 +46,7 @@ public class MainActivity extends AppCompatActivity {
     Button logout;
     Button discount;
     TextView named;
-    double lati;
-    double longi;
-    Location mlocation;
-    FusedLocationProviderClient fusedLocationProviderClient;
     private static final int Request_Code = 101;
-    ArrayList<String> malls_nearby = new ArrayList<String>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> getMAll(double lati, double longi) {
         final ArrayList<String> final_malls = new ArrayList<String>();
+        final ArrayList<String> final_malls_file = new ArrayList<String>();
+
         final double X = longi;
         final double Y = lati;
         Thread network_thread = new Thread(new Runnable() {
@@ -140,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i < mall_array.length(); i++) {
                             JSONObject temp = new JSONObject(mall_array.get(i).toString());
                             final_malls.add(temp.getString("Name"));
+                            final_malls.add(temp.getString("File"));
                         }
                         if (final_malls.size() == 0) return;
                         runOnUiThread(new Runnable() {
@@ -148,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MainActivity.this, pop.class);
                                 Bundle b = new Bundle();
                                 b.putSerializable("Malls", final_malls);
+                                b.putSerializable("File",final_malls_file);
                                 intent.putExtra("BUNDLE", b);
                                 startActivity(intent);
                             }

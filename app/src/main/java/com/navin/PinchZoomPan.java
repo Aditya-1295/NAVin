@@ -89,9 +89,6 @@ public class PinchZoomPan extends View{
                 canvas.drawCircle((float) navigation.path.get(i).X, (float) navigation.path.get(i).Y, 10, p);
                 p.setColor(Color.parseColor("#3D195D"));
                 canvas.drawCircle((float) navigation.path.get(i).X, (float) navigation.path.get(i).Y, 7, p);
-
-
-
             }
         }
     }
