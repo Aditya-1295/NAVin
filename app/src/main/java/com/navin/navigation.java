@@ -44,7 +44,7 @@ public class navigation extends AppCompatActivity {
         PinchZoomPan.main_mall = (Mall) bb.getSerializable("MALL");
 
         currShopName = findViewById(R.id.currShopName);
-        getImage  = findViewById(R.id.getIm);
+        //getImage  = findViewById(R.id.getIm);
         pzp = findViewById(R.id.pinchZoomPan);
         navigate = findViewById(R.id.navigate);
         sShop = findViewById(R.id.sShop);
@@ -77,16 +77,7 @@ public class navigation extends AppCompatActivity {
                 startActivity(k);
             }
         });
-        getImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigation.path=null;
-                endpoint[0]=endpoint[1]=null;
-                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                i.setType("*/*");
-                startActivityForResult(i, RESULT_LOAD_DOCUMENT);
-            }
-        });
+
 
         navigate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +97,8 @@ public class navigation extends AppCompatActivity {
                     endpoint[0]=endpoint[1] = null;
                     navigate.setText("Start navigating");
                 }
+
+
             }
         });
     }

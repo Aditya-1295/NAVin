@@ -76,7 +76,7 @@ public class pop extends Activity {
 
                     @Override
                     public void onClick(View v) {
-
+                        Toast.makeText(pop.this,"Downloading please wait",Toast.LENGTH_LONG).show();
                         final Mall mall = null;
 
                         Thread net_thd = new Thread(new Runnable() {

@@ -85,10 +85,10 @@ public class PinchZoomPan extends View{
         }
         if (navigation.path != null) {
             for (int i = 0; i < navigation.path.size(); i++) {
-                p.setColor(Color.parseColor("#c88aff"));
+                p.setColor(Color.parseColor("#51B5FF"));
                 canvas.drawCircle((float) navigation.path.get(i).X, (float) navigation.path.get(i).Y, 10, p);
-                p.setColor(Color.parseColor("#3D195D"));
-                canvas.drawCircle((float) navigation.path.get(i).X, (float) navigation.path.get(i).Y, 7, p);
+                p.setColor(Color.parseColor("#FFFFFF"));
+                canvas.drawCircle((float) navigation.path.get(i).X, (float) navigation.path.get(i).Y, 3, p);
             }
         }
     }

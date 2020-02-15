@@ -62,13 +62,6 @@ public class login extends AppCompatActivity {
     }
 
     private void Login(final String a, final String b) {
-//DELETE THIS
-        Intent i = new Intent(login.this, MainActivity.class);
-        i.putExtra("USERNAME","test");
-        startActivity(i);
-
-        //DELETE THIS
-
 
 
         Thread network_thread = new Thread(new Runnable() {
