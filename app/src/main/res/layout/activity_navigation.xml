@@ -10,22 +10,22 @@
 
     <com.otaliastudios.zoom.ZoomLayout
         android:id="@+id/zoomlay"
-        android:layout_width="381dp"
-        android:layout_height="484dp"
+        android:layout_width="379dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
         android:scrollbars="vertical|horizontal"
         app:alignment="center"
         app:animationDuration="280"
         app:flingEnabled="true"
         app:hasClickableChildren="true"
         app:horizontalPanEnabled="true"
-        app:layout_constraintBottom_toBottomOf="@id/screen"
+        app:layout_constraintBottom_toTopOf="@+id/tagbox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintLeft_toLeftOf="@+id/screen"
         app:layout_constraintRight_toRightOf="@+id/screen"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/screen"
-        app:layout_constraintVertical_bias="0.449"
+        app:layout_constraintTop_toBottomOf="@+id/currShopName"
         app:maxZoom="10"
         app:maxZoomType="zoom"
         app:minZoom="1"
@@ -57,9 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/navigate"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/navigate"
@@ -74,12 +72,10 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="Start navigating"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/swipe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zoomlay"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/sShop"
@@ -103,14 +99,14 @@
         android:id="@+id/currShopName"
         android:layout_width="143dp"
         android:layout_height="31dp"
-        android:layout_marginBottom="4dp"
+        android:layout_margin="5dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="CURRENT STORE"
         android:textAlignment="center"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/zoomlay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sShop" />
 
     <Button
         android:id="@+id/dShop"
@@ -130,5 +126,20 @@
         app:layout_constraintHorizontal_bias="0.589"
         app:layout_constraintStart_toEndOf="@+id/sShop"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/tagbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundbox"
+        android:ems="10"
+        android:hint="🔍 Search by product"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/navigate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

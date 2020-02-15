@@ -59,7 +59,7 @@ public class pop extends Activity {
         Intent i = getIntent();
         Bundle b = i.getBundleExtra("BUNDLE");
 
-        ArrayList<String> malls = (ArrayList<String>) b.getSerializable("Malls");
+        final ArrayList<String> malls = (ArrayList<String>) b.getSerializable("Malls");
         final ArrayList<String> files = (ArrayList<String>) b.getSerializable("Files");
 
         mallnear = findViewById(R.id.mallnear);
@@ -91,6 +91,7 @@ public class pop extends Activity {
                                         @Override
                                         public void run() {
                                             Intent i = new Intent(pop.this, navigation.class);
+                                            i.putExtra("MallName",malls.get(position));
                                             Bundle b = new Bundle();
                                             b.putSerializable("MALL",mall);
                                             i.putExtra("BUNDLE",b);

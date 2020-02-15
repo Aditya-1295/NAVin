@@ -21,6 +21,7 @@ import com.navin.Mall;
 import com.navin.Store;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import static com.navin.navigation.currShopName;
 import static com.navin.navigation.endpoint;
@@ -60,7 +61,6 @@ public class PinchZoomPan extends View{
                 }
             }
             return false;// badme true ki backchodi karna
-
         }
     };
 
@@ -80,8 +80,25 @@ public class PinchZoomPan extends View{
         canvas.drawBitmap(bitImage,0,0,p);
 
         for(Store i :main_mall.floors.get(0).stores ){
-            p.setColor(Color.parseColor("#"+i.color.substring(2,8)));// # is important !!! colour stats from #
-            canvas.drawCircle((float)i.X , (float)i.Y ,20,p);
+            if(navigation.mappings==null) {
+                p.setColor(Color.parseColor("#" + i.color.substring(2, 8)));// # is important !!! colour stats from #
+                canvas.drawCircle((float) i.X, (float) i.Y, 20, p);
+            }
+
+            else{
+                String tag_entered = navigation.tagbox.getText().toString().toLowerCase();
+                for(Map.Entry<String,String[]> z : navigation.mappings.entrySet()){
+                    if(z.getKey().equals(i.ID)){
+
+                        for(int l = 0; l<z.getValue().length;l++){
+                            if(z.getValue()[l].contains(tag_entered)){
+                                p.setColor(Color.parseColor("#" + i.color.substring(2, 8)));// # is important !!! colour stats from #
+                                canvas.drawCircle((float) i.X, (float) i.Y, 20, p);
+                            }
+                        }
+                    }
+                }
+            }
         }
         if (navigation.path != null) {
             for (int i = 0; i < navigation.path.size(); i++) {
