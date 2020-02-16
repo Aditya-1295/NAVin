@@ -10,7 +10,7 @@
 
     <com.otaliastudios.zoom.ZoomLayout
         android:id="@+id/zoomlay"
-        android:layout_width="379dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_marginBottom="10dp"

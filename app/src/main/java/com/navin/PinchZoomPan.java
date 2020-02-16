@@ -22,6 +22,7 @@ import com.navin.Store;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 import static com.navin.navigation.currShopName;
 import static com.navin.navigation.endpoint;
@@ -83,6 +84,9 @@ public class PinchZoomPan extends View{
             if(navigation.mappings==null) {
                 p.setColor(Color.parseColor("#" + i.color.substring(2, 8)));// # is important !!! colour stats from #
                 canvas.drawCircle((float) i.X, (float) i.Y, 20, p);
+                p.setColor(Color.WHITE);
+                Random r = new Random();
+                canvas.drawText("10%",(float) i.X-10, (float) i.Y, p);
             }
 
             else{
@@ -94,6 +98,8 @@ public class PinchZoomPan extends View{
                             if(z.getValue()[l].contains(tag_entered)){
                                 p.setColor(Color.parseColor("#" + i.color.substring(2, 8)));// # is important !!! colour stats from #
                                 canvas.drawCircle((float) i.X, (float) i.Y, 20, p);
+                                p.setColor(Color.WHITE);
+                                canvas.drawText("10%",(float) i.X-10, (float) i.Y, p);
                             }
                         }
                     }
